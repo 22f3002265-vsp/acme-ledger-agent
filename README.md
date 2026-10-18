@@ -50,3 +50,4 @@ The response has the shape `{"answer": 1099.7}` for the bundled sample data.
 ## Redeploying after a 405 error
 
 Make sure the Vercel Root Directory contains `app.py`, `requirements.txt`, `export.json`, and `rates.json` directly (not nested one folder deeper). Redeploy after pushing these files. Test `POST /answer` rather than opening `/answer` in a browser, since browsers navigate with `GET`.
+\n\n## Fix for product revenue ranking\n\nThe revenue-ranking parser recognizes questions such as “top-selling product by revenue” and returns the product name, rather than the overall revenue total.\n

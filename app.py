@@ -223,7 +223,15 @@ def answer_question(question: str) -> Any:
         intent = "product_revenue" if is_product_revenue else "revenue"
         rows = filtered_orders(question, intent)
         # Grouping/ranking questions return the relevant name.
-        if any(w in q for w in ("which product", "best-selling product", "top product", "most popular product", "product generated the most", "highest revenue product")):
+        if (
+            any(w in q for w in (
+                "which product", "best-selling product", "top product",
+                "top-selling product", "top selling product", "most popular product",
+                "product generated the most", "highest revenue product",
+                "top-selling by revenue", "top selling by revenue",
+            ))
+            or ("product" in q and any(w in q for w in ("top-selling", "top selling", "highest revenue", "most revenue")))
+        ):
             totals: dict[str, Decimal] = defaultdict(Decimal)
             for o in rows:
                 totals[str(o.get("product", ""))] += amount_usd(o)
