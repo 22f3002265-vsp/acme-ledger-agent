@@ -14,7 +14,7 @@ acme-ledger-agent-vercel/
 └── README.md
 ```
 
-Vercel detects the FastAPI app from the root-level `main.py`; no `api/` wrapper or custom rewrite is needed. The deployed endpoint is `/answer`.
+Vercel detects the FastAPI app from the root-level `app.py`, a documented FastAPI entrypoint; no custom rewrite is needed. The deployed endpoint is `/answer`.
 
 ## Deploy with GitHub
 
@@ -45,3 +45,8 @@ The response has the shape `{"answer": 1099.7}` for the bundled sample data.
 ## Important data note
 
 `export.json` is the 100-row snapshot currently bundled with this project. If the assignment expects the full live export, replace it with the complete export before deployment.
+
+
+## Redeploying after a 405 error
+
+Make sure the Vercel Root Directory contains `app.py`, `requirements.txt`, `export.json`, and `rates.json` directly (not nested one folder deeper). Redeploy after pushing these files. Test `POST /answer` rather than opening `/answer` in a browser, since browsers navigate with `GET`.
